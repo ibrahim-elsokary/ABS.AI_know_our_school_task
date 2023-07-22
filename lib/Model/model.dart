@@ -1,20 +1,20 @@
 //TODO: add your model class here
 
-class StudentInfo {
+class SchoolInfo {
   final String schoolName;
   final String schoolAddress;
   final String numberOfStudents;
   final String numberOfTeachers;
 
-  StudentInfo({
+  SchoolInfo({
     required this.schoolName,
     required this.schoolAddress,
     required this.numberOfStudents,
     required this.numberOfTeachers,
   });
 
-  factory StudentInfo.fromJson(Map<String, dynamic> json) {
-    return StudentInfo(
+  factory SchoolInfo.fromJson(Map<String, dynamic> json) {
+    return SchoolInfo(
       schoolName: json["School Name"],
       schoolAddress: json["School Address"],
       numberOfStudents: json["Number of Students"],
@@ -31,13 +31,13 @@ class StudentInfo {
     };
   }
 
-  StudentInfo copyWith(
+  SchoolInfo copyWith(
     String? schoolName,
     String? schoolAddress,
     String? numberOfStudents,
     String? numberOfTeachers,
   ) {
-    return StudentInfo(
+    return SchoolInfo(
       schoolName: schoolName ?? this.schoolName,
       schoolAddress: schoolAddress ?? this.schoolAddress,
       numberOfStudents: numberOfStudents ?? this.numberOfStudents,

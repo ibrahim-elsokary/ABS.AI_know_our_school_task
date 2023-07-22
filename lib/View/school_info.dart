@@ -67,7 +67,7 @@ class SchoolInfo extends StatelessWidget {
                           //TODO Call your function to load the school data
                           //TODO: Hint: Replace the class attributes with the data fetched from the JSON file
                         },
-                        child: const Text(
+                      child: const Text(
                           'Show Data',
                           style: TextStyle(
                               color: Colors.white,

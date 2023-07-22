@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:know_our_school/View/school_info.dart';
+import 'package:know_our_school/data/local/repository/school_info_repo_implementation.dart';
 
 void main() {
+  SchoolInfoImple().getSchoolInfoList();
   runApp(const MyApp());
 }
 
