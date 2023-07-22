@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:know_our_school/Model/model.dart';
+import 'package:know_our_school/ViewModel/view_model.dart';
+import 'package:provider/provider.dart';
 
 class SchoolInfo extends StatelessWidget {
   SchoolInfo({Key? key}) : super(key: key);
@@ -10,11 +13,17 @@ class SchoolInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<SchoolInfoProvider>(context);
+    late SchoolInfoModel school;
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 120,
         backgroundColor: const Color(0xff477B71),
-        leading: const Icon(Icons.menu, size: 30,),
+        leading: const Icon(
+          Icons.menu,
+          size: 30,
+        ),
         title: const Text(
           'School Info',
           style: TextStyle(color: Colors.white, fontSize: 30),
@@ -32,15 +41,24 @@ class SchoolInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only( top: 20),
-              child: Image.asset('assets/images/school.png', width:250,),
+              padding: const EdgeInsets.only(top: 20),
+              child: Image.asset(
+                'assets/images/school.png',
+                width: 250,
+              ),
             ),
             reusableTextField(schoolName, Icons.school),
-            const SizedBox(height: 15,),
+            const SizedBox(
+              height: 15,
+            ),
             reusableTextField(schoolAddress, Icons.location_on_rounded),
-            const SizedBox(height: 15,),
+            const SizedBox(
+              height: 15,
+            ),
             reusableTextField(studentsNo, Icons.person),
-            const SizedBox(height: 15,),
+            const SizedBox(
+              height: 15,
+            ),
             reusableTextField(teachersNo, Icons.person),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
@@ -56,18 +74,27 @@ class SchoolInfo extends StatelessWidget {
                           blurRadius: 12.0)
                     ],
                     borderRadius: BorderRadius.circular(30.0),
-                    color: const Color(0xffe9b637) ,
+                    color: const Color(0xffe9b637),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: ButtonTheme(
                       minWidth: 300,
                       child: TextButton(
-                        onPressed: () {
+                        onPressed: () async {
                           //TODO Call your function to load the school data
                           //TODO: Hint: Replace the class attributes with the data fetched from the JSON file
+                          await provider.getSchoolInfoList();
+                          if (provider.schoolInfoList.isNotEmpty) {
+                            school = provider.schoolInfoList.first;
+                            schoolName = school.schoolName;
+                            schoolAddress = school.schoolAddress;
+                            studentsNo = school.numberOfStudents;
+                            teachersNo = school.numberOfTeachers;
+                          }
+                          //TODO:Done😃
                         },
-                      child: const Text(
+                        child: const Text(
                           'Show Data',
                           style: TextStyle(
                               color: Colors.white,
@@ -93,13 +120,23 @@ class SchoolInfo extends StatelessWidget {
           color: const Color(0xffd3d3d3),
           borderRadius: BorderRadius.circular(30.0),
         ),
-        child:
-        Row(
+        child: Row(
           children: [
-            const SizedBox(width: 10,),
-            Icon(iconShape, color: Colors.white,size: 35,),
-            const SizedBox(width: 10,),
-            Text(text,style: const TextStyle(color: Colors.white, fontSize: 25),),
+            const SizedBox(
+              width: 10,
+            ),
+            Icon(
+              iconShape,
+              color: Colors.white,
+              size: 35,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Text(
+              text,
+              style: const TextStyle(color: Colors.white, fontSize: 25),
+            ),
           ],
         ),
       ),

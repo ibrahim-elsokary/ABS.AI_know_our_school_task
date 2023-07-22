@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:know_our_school/View/school_info.dart';
+import 'package:know_our_school/ViewModel/view_model.dart';
 import 'package:know_our_school/data/local/repository/school_info_repo_implementation.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  SchoolInfoImple().getSchoolInfoList();
   runApp(const MyApp());
 }
 
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SchoolInfo(),
+      home: ChangeNotifierProvider<SchoolInfoProvider>(
+          create: (context) => SchoolInfoProvider(SchoolInfoImple()), child: SchoolInfo()),
     );
   }
 }
